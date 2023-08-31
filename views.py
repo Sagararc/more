@@ -19,6 +19,20 @@ from django.contrib.auth.decorators import user_passes_test
 # Create your views here.
 
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        
+        # Using Django's built-in authentication
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('dash')
+        return HttpResponse("Wrong credentials. Please try again.")
+    else:
+        return render(request, 'login.html')
+
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect('/')
@@ -432,20 +446,6 @@ def adminLogin(request):
         return render(request, 'adminlogin.html')
     
 
-@user_passes_test(is_active, login_url='/login')
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        
-        # Using Django's built-in authentication
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('dash')
-        return HttpResponse("Wrong credentials. Please try again.")
-    else:
-        return render(request, 'login.html')
         
 
     

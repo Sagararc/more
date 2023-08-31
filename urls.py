@@ -2,7 +2,7 @@ from django.urls import path
 from django.contrib.auth.views import LoginView
 from .views import login_view,dash,attendance,raw_export_data,success,attendence1,raw,outReg,supForm,outlet,updateOutlet,adminLogin,checkout,export_data,import_data,import_page,register,logout_user,userManage
 urlpatterns = [
-    path('' , LoginView.as_view(template_name='login.html') , name='login'),
+    path('' , login_view , name='login'),
     path('logout/' , logout_user, name= 'logout'),
     path('dash/' , dash , name='dash'),
     path('attendance/' , attendance , name='attendance'),
