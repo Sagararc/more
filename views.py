@@ -417,8 +417,7 @@ def attendence1(request):
     
     return render(request , 'att.html' , {'att' : att , 'chk' : chk})
 
-def is_superuser(user):
-    return user.is_superuser
+
 
 
 def is_active(user):
@@ -426,9 +425,6 @@ def is_active(user):
 
 
 
-from django.contrib import messages 
-
-@user_passes_test(is_superuser)
 def adminLogin(request):
     if request.method == 'POST':
         username = request.POST['username']
