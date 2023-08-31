@@ -122,4 +122,4 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'dash'
 
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
