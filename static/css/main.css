@@ -1,0 +1,93 @@
+.image-container {
+    position: relative;
+    margin-top: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 195px;
+    height: 207px;
+    background: transparent url('img/Picture 1.png') 0% 0% no-repeat padding-box;
+    opacity: 1;
+    /* Add mobile-specific styles */
+}
+
+
+
+
+.form-body {
+    position: relative;
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 340px;
+    height: 511px;
+    /* UI Properties */
+    background: transparent url('/static/images/logo/Rectangle\ 25.png') 0% 0% no-repeat padding-box;
+    border-radius: 40px;
+    opacity: 1;
+}
+
+.head {
+    margin-left: 120px;
+    padding-top: 50px;
+    width: 89px;
+    height: 46px;
+    /* UI Properties */
+    text-align: center;
+    font: Abril Fatface normal normal normal 34px/39px;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+
+.para {
+    padding-top: 50px;
+    padding-left: 20px;
+    width: 330px;
+    height: 36px;
+    /* UI Properties */
+    text-align: left;
+    font: Work Sans normal normal normal 14px/16px;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 0.7;
+}
+
+input {
+    padding-top: 200px;
+    padding-top: 200px;
+    width: 80%;
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 13px;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-transition: box-shadow .5s ease;
+    -moz-transition: box-shadow .5s ease;
+    -o-transition: box-shadow .5s ease;
+    -ms-transition: box-shadow .5s ease;
+    transition: box-shadow .5s ease;
+}
+
+.abc {
+    background-color: white;
+    border-radius: 40px;
+    width: 95%;
+}
+
+.dash-head {
+    color: #F04E23;
+    font-weight: 700;
+    font-size: 45px;
+    width: 100%;
+    font: Abril Fatface normal normal normal 34px/39px;
+    letter-spacing: 0px;
+    opacity: 1;
+}
+

@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="row container-fluid">
+    <div class="col-sm-12 mt-2">
+        <h2>
+            Outlets
+
+        </h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="/outReg" class="btn btn-lg btn-info"><i class="fas fa-plus-square"></i> Add New Outlet</a>
+                <button type="button" class="btn btn-lg btn-danger waves-effect waves-light " data-toggle="modal"
+                    data-target="#exampleModalPrimary"><i class="fas fa-arrow-circle-up"></i> Import</button>
+                
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalDefault" tabindex="-1" role="dialog" aria-labelledby="exampleModalDefaultLabel"
+    aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #0885f2; ">
+                <h6 class="modal-title m-0" id="exampleModalDefaultLabel" style="color:white;">Upload Beat Plan</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="la la-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body" style=" height:200px;">
+                <a href="#" class="">Sample CSV</a>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form action="">
+                            <div class="mb-3">
+                                <label for="csvFile" class="form-label">Upload CSV File:</label>
+
+                      
+                              
+                                <div class="input-group">
+                                    <input type="file" class="form-control" id="csvFile" name="csvFile">
+                                    
+                                </div>
+                            </div>
+                        
+
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row container-fluid">
+
+    <div class="col-md-12 mt-4">
+
+        <form action="">
+            <div class="row">
+                <div class="col-sm-2">
+                    <input class="form-control" type="text" value="" name="search"
+                        placeholder="Search by Outlet name or code..." id="example-tel-input" style="height: 50px;">
+                </div>
+               
+                <div class="col-md-2">
+
+                    <button type="submit" class="btn btn-lg btn-info waves-effect waves-light">Submit</button>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+<div class="row container-fluid">
+    <div class="col-md-12 mt-4">
+        <div class="table-rep-plugin">
+            <div class="table-responsive mb-0" data-pattern="priority-columns">
+                <table id="tech-companies-1" class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>S.NO.</th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Address</th>
+                            <th>Lat</th>
+                            <th>Long</th>
+                            <th>City</th>
+                            <th>Status</th>
+                            <th><span style="margin-left: 25px;">Action</span></th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for u in out %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ u.name }}</td>
+
+                            <td>{{ u.code }}</td>
+                            <td>{{ u.address }}</td>
+                            <td>{{ u.lat }}</td>
+                            <td> {{u.long}}</td>
+
+                            <td>{{ u.cityReg }}</td>
+                            <td> {% if u.status == 'Active' %}
+                                <span style="background-color: rgb(42, 238, 42);">
+                                    {{ u.status }}
+                                </span>
+                                {% else %}
+                                <span style="background-color: rgb(248, 120, 120);">
+                                    {{ u.status }}
+                                </span>
+                                {% endif %}
+                            </td>
+                            <td> <a class='btn ' style="color: red;" href="{% url 'updateOutlet' u.id %}" value=""> <i
+                                        class="la la-cog la-spin progress-icon-spin"></i>
+                                </a>
+                                
+                                
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <br />
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="col-sm-12 col-md-7" style="margin-right: 400px;">
+                            <div class="dataTables_paginate paging_simple_numbers" id="data-table_paginate">
+                                <ul class="pagination">
+                                    {% if out.has_previous %}
+                                    <li class="page-item"><a class="page-link"
+                                            href="?page={{ out.previous_page_number }}">Previous</a>
+                                    </li>
+                                    {% else %}
+                                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                    {% endif %}
+
+                                    {% for page_num in out.paginator.page_range %}
+                                    <li class="page-item {% if page_num == out.number %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                                    </li>
+                                    {% endfor %}
+
+
+                                    {% if out.has_next %}
+                                    <li class="page-item"><a class="page-link"
+                                            href="?page={{ out.next_page_number }}">Next</a>
+                                    </li>
+                                    {% else %}
+                                    <li class="page-item disabled"><a class="page-link" href="#">Next</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}

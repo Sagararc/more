@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<div class="page-content">
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                           
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Dastyle</a></li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Forms</a></li>
+                                <li class="breadcrumb-item active">Form Elements</li>
+                            </ol>
+                        </div><!--end col-->
+
+                    </div><!--end row-->
+                </div><!--end page-title-box-->
+            </div><!--end col-->
+        </div><!--end row-->
+        <!-- end page title end breadcrumb -->
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="card" >
+                    <div class="card-header">
+                        <h4 class="card-title">Outlet Form</h4>
+
+                        {% if form.errors %}
+        <div class="alert alert-danger">
+            {% for field in form %}
+            {% for error in field.errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+                    </div><!--end card-header-->
+                    <div class="card-body" >
+                        <div class="row">
+                            <div class="col-lg-12" >
+                                <form method='POST' action= "{% url 'outReg' %}">
+                                    {% csrf_token %}
+
+                                    
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-2 col-form-label text-right">
+                                            <h5>Outlet Name</h5>
+                                        </div>
+
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" value="" name="name"
+                                                id="example-tel-input">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-2 col-form-label text-right">
+                                            <h5>Code</h5>
+                                        </div>
+
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" value="" name="code"
+                                                id="example-tel-input">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-2 col-form-label text-right">
+                                            <h5>Address</h5>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" name= 'address' value="" id="example-tel-input">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-2 col-form-label text-right">
+                                            <h5>Latitude</h5>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" name='lat' value="" id="example-tel-input">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-2 col-form-label text-right">
+                                            <h5>Longitude</h5>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" name= 'long' value="" id="example-tel-input">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-2 col-form-label text-right">
+                                            <h5>Status</h5>
+                                        </div>
+                                        <div class="col-md-8 mt-2">
+                                            <div class="form-check-inline my-1">
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio1" name="status" value="Active"
+                                                           class="custom-control-input" {% if form.instance.status == 'Active' %}checked{% endif %}>
+                                                    <label class="custom-control-label" for="customRadio1">Active</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-check-inline my-1">
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio2" name="status" value="Inactive"
+                                                           class="custom-control-input" {% if form.instance.status == 'Inactive' %}checked{% endif %}>
+                                                    <label class="custom-control-label" for="customRadio2">Inactive</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                   
+
+
+                                   
+                                    <hr>
+                                    <div class="row">
+
+                                        <div class="col-md-4" style="margin-left:650px ;">
+
+                                            <button type="submit"
+                                                class="btn btn-info btn-lg waves-effect waves-light">Submit</button>
+                                        </div>
+                                        
+                                    </div>
+
+                                </form>
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div><!--end card-body-->
+                </div><!--end card-->
+            </div><!--end col-->
+        </div><!--end row-->
+
+
+    </div><!-- container -->
+
+   
+</div>
+
+{% endblock content %}

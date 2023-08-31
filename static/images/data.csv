@@ -1,0 +1,10 @@
+id,cityReg,name,code,mobile,status,lock
+19,Gurgaon,Shiva,132456,7388855526,Active,Lock
+20,Gurgaon,Govind Dixit,1324564,7388855578,Active,Lock
+21,Gurgaon,Govind Dixit,132456443,7388855533,Active,Lock
+22,Gurgaon,Govind Dixit,3454412,root,Active,Lock
+23,Gurgaon,4,345423,7388855522,Active,Lock
+24,Delhi,3,132456789,876543676,Active,Lock
+25,Gurgaon,2,3458787,87654365,Active,Lock
+26,Gurgaon,1,9,7388855590,Inactive,Lock
+27,Gurgaon,Akash Bhatt,345211,7388855597,Active,Lock

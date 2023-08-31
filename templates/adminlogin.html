@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/app.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        /* Custom styles can be added here */
+    </style>
+</head>
+
+<body class="account-body accountbg">
+
+    <!-- Register page -->
+    <div class="container">
+        <div class="row vh-100 d-flex justify-content-center">
+            <div class="col-12 align-self-center">
+                <div class="row">
+                    <div class="col-lg-5 mx-auto">
+                        <div class="card">
+                            <div class="card-body p-0 auth-header-box">
+                                <div class="text-center p-3">
+                                    <!-- <a href="" class="logo logo-admin">
+                                        <img src="/static/images/plus.png" height="150" alt="logo" class="auth-logo">
+                                    </a> -->
+                                  <h3 style="color: white;">LOGIN</h3>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                {% if messages %}
+<div class="alert alert-danger">
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<!-- Rest of your form and template content -->
+
+                                <form method="POST" class="form-horizontal auth-form my-4" action="{% url 'adminLogin' %}">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                                        </div>
+                                    </div><!--end form-group-->
+
+                                    <div class="form-group">
+                                       
+                                        <div class="input-group mb-3">
+                                            <input type="password" class="form-control" name="password" id="userpassword" placeholder="Enter password">
+                                        </div>
+                                    </div><!--end form-group-->
+
+                                    <div class="form-group mb-0 row">
+                                        <div class="col-12 mt-2">
+                                            <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Log In <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                        </div><!--end col-->
+                                    </div> <!--end form-group-->
+                                </form><!--end form-->
+
+                            </div>
+                        </div><!--end card-->
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end col-->
+        </div><!--end row-->
+    </div><!--end container-->
+    <!-- End Register page -->
+
+    <!-- jQuery  -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/waves.js"></script>
+    <script src="/static/js/feather.min.js"></script>
+    <script src="/static/js/simplebar.min.js"></script>
+    <script>
+        // Add any additional scripts here
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row container-fluid">
+
+    <div class="col">
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dash">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/user">Users</a></li>
+
+        </ol>
+    </div>
+
+
+    <div class="col-sm-12 mt-2">
+        <h2>
+            Users
+
+        </h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="/register" class="btn btn-lg btn-info"><i class="fas fa-plus-square"></i> Add New User</a>
+            <a href="/import_page" class="btn btn-danger btn-lg"><i class="fas fa-arrow-circle-up"></i> Import</a>
+            <a href="{% url 'export_data' %}" class="btn btn-lg btn-warning waves-effect waves-light"><i
+                    class="fas fa-arrow-circle-down"></i> Export</a>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row container-fluid">
+    <div class="col-md-12 mt-4">
+
+        <form action="">
+            <div class="row">
+                <div class="col-sm-2">
+                    <input class="form-control" type="text" value="{{ request.GET.search }}" name="search"
+                        placeholder="Search by name or code..." id="example-tel-input" style="height : 50px;">
+
+
+                </div>
+
+
+
+                <div class="col-sm-2">
+                    <select class="form-control" name="citySearch" style="height : 50px;">
+                        <option value="">All City</option>
+                        {% for city in city %}
+                        <option value="{{ city.id }}">{{ city.city }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+
+                    <button type="submit" class="btn btn-info btn-lg waves-effect waves-light">Submit</button>
+                    <a class="btn btn-lg btn-secondary" href="/user"><i class="fas fa-redo"></i> Reset</a>
+
+                </div>
+
+            </div>
+        </form>
+    </div><!--end card-header-->
+
+</div>
+
+
+<div class="row container-fluid mb-4">
+    <div class="col-md-12 mt-4">
+
+
+        <div class="table-rep-plugin">
+            <div class="table-responsive mb-0" data-pattern="priority-columns">
+                <table id="tech-companies-1" class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>S.NO.</th>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                          
+
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        {% for u in usr %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ u.name }}</td>
+                            <td>{{ u.username }}</td>
+                            <!-- <td>{{ u.code }}</td>
+                            <td>{{ u.cityReg }}</td>
+                            <td> {% if u.status == 'Active' %}
+                                <span style="background-color: rgb(42, 238, 42);">
+                                    {{ u.status }}
+                                </span>
+                                {% else %}
+                                <span style="background-color: rgb(248, 120, 120);">
+                                    {{ u.status }}
+                                </span>
+                                {% endif %}
+                            </td> -->
+                         
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="col-sm-12 col-md-7" style="margin-right: 400px;">
+                            <div class="dataTables_paginate paging_simple_numbers" id="data-table_paginate">
+                                <ul class="pagination">
+                                    {% if usr.has_previous %}
+                                    <li class="page-item"><a class="page-link"
+                                            href="?page={{ usr.previous_page_number }}">Previous</a>
+                                    </li>
+                                    {% else %}
+                                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                    {% endif %}
+
+                                    {% for page_num in usr.paginator.page_range %}
+                                    <li class="page-item {% if page_num == usr.number %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                                    </li>
+                                    {% endfor %}
+
+
+                                    {% if usr.has_next %}
+                                    <li class="page-item"><a class="page-link"
+                                            href="?page={{ usr.next_page_number }}">Next</a>
+                                    </li>
+                                    {% else %}
+                                    <li class="page-item disabled"><a class="page-link" href="#">Next</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MORE</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <style>
+        .checkin {
+            text-align: center;
+        }
+
+        .camera-button-container {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .camera-button {
+            display: block;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .camera-button input[type="file"] {
+            display: none;
+        }
+
+        .camera-button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+    <style>
+
+    </style>
+</head>
+
+<body style="background-color:#F04E23;">
+
+    <div class="row " style="width:auto;">
+        <div class="col-md-12 ">
+            <div class="row justify-content-left mt-4  " style=" width: auto; height:auto; border-radius:40px;">
+                <div class="col-md-12 text-left">
+                    <h2 class="dash-head" style="color: white;">Attendance</h2>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mb-2" style="background-color:white;">
+        <div class="col-md-12">
+            <h2 style="color:#F04E23;">Good Morning {{ user }}</h2>
+        </div>
+    </div>
+    
+
+
+    <div class="row  justify-content-center" style="background-color:white;">
+
+        <div class="col-md-6 col-12 mb-4 text-center">
+            <form action="{% url 'attendance' %}" role="form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" value={{user}} name='user' hidden>
+                <input type="text" value={{username}} name='username' hidden>
+              
+                <input type="text" name="checkin" value="{{ checkin }}" hidden>
+                <input type="text" name="lat" value="{{ lat }}" hidden>
+                <input type="text" name="long" value="{{ long }}" hidden>
+
+                <div class="camera-button-container">
+                    <label for="checkin_image" class="camera-button">
+                        {% if checkin_image_base64 %}
+                        <img src="data:image/jpeg;base64,{{ checkin_image_base64 }}" alt="Check-in Image" width="90" height="90">
+                        {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="#F04E23"
+                            class="bi bi-plus-circle" viewBox="0 0 16 16" id="cameraIcon">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                        {% endif %}
+                        <input type="file" id="checkin_image" name="checkin_image" accept="image/*" capture="camera">
+                    </label>
+                </div>
+                
+                
+
+                <div class="row mt-4">
+                    <div class="col-md-12 mb-4 text-center">
+                        {% if not checkin_time %}
+                        <button class="btn btn-lg" type="submit"
+                            style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;">CHECKIN</button>
+                        {% else %}
+                        <button class="btn btn-lg" type="submit"
+                            style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;" disabled>CHECKIN</button>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="col-md-6 col-12 mb-4 text-center">
+            <form action="{% url 'checkout' %}" role="form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" value={{user}} name='user' hidden>
+                <input type="text" value={{username}} name='username' hidden>
+               
+                <input type="text" name="checkout" value="{{ checkout }}" hidden>
+                <input type="text" name="lat" value="{{ lat }}" hidden>
+                <input type="text" name="long" value="{{ long }}" hidden>
+
+                <div class="camera-button-container">
+                    <label for="checkout_image" class="camera-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="#F04E23"
+                            class="bi bi-plus-circle" viewBox="0 0 16 16" id="cameraIcon">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                        <input type="file" id="checkout_image" name="checkout_image" accept="image/*" capture="camera">
+                    </label>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-12 mb-4 text-center">
+                        {% if checkin_time %}
+                        <button class="btn btn-lg" type="submit"
+                            style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;">CHECKOUT</button>
+                        {% else %}
+                        <button class="btn btn-lg" type="submit"
+                            style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;" disabled>CHECKOUT</button>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    
+
+        <div class="row">
+
+            <div class="col-md-4 text-center" style="color:#F04E23; font-weight:bolder;">
+               
+                {% if checkin_time %}
+                     <p  style="color: white;">{{ checkin_time }}</p>
+                     {% endif %}
+                <div class="chk" style="background-color: #F04E23; color:white;">
+                    <h4> Checkin Time</h4>
+                </div>
+            </div>
+
+
+            {% comment %} <div class="col-md-4 text-center" style="color:#F04E23; font-weight:bolder;">
+                {% if checkout_time %}
+                <p style="color: white;">{{ checkout_time }}</p>
+                {% endif %}
+
+                <div class="chk" style="background-color: #F04E23; color:white;">
+                    <h4> CheckOut Time</h4>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 text-center" style="color:white; font-weight:bolder;">
+                <p>8 HRS</p>
+                <div class="chk" style="background-color: #F04E23; color:white;">
+                    <p>Total Working</p>
+                </div>
+            </div>
+        </div>
+ {% endcomment %}
+
+
+   
+
+
+    
+
+
+
+
+
+
+
+
+    <script>
+        const cameraIcon = document.getElementById("cameraIcon");
+        const cameraInput = document.getElementById("cameraInput");
+
+        cameraIcon.addEventListener("click", () => {
+            cameraInput.click();
+        });
+    </script>
+
+
+
+
+</body>
+
+
+
+
+</html>
