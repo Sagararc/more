@@ -75,11 +75,6 @@ input {
     transition: box-shadow .5s ease;
 }
 
-.abc {
-    background-color: white;
-    border-radius: 40px;
-    width: 95%;
-}
 
 .dash-head {
     color: #F04E23;

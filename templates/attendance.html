@@ -64,7 +64,7 @@
             <h2 style="color:#F04E23;">Good Morning {{ user }}</h2>
         </div>
     </div>
-    
+
 
 
     <div class="row  justify-content-center" style="background-color:white;">
@@ -78,6 +78,7 @@
                 <input type="text" name="checkin" value="{{ checkin }}" hidden>
                 <input type="text" name="lat" value="{{ lat }}" hidden>
                 <input type="text" name="long" value="{{ long }}" hidden>
+                <input type="text" name="flag" value="{{ flag }}" hidden>
 
                 <div class="camera-button-container">
                     <label for="checkin_image" class="camera-button">
@@ -91,7 +92,7 @@
                                 d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                         </svg>
                         {% endif %}
-                        <input type="file" id="checkin_image" name="checkin_image" accept="image/*" capture="camera">
+                        <input type="file" id="checkin_image" name="checkin_image" accept="image/*" capture="camera" required>
                     </label>
                 </div>
                 
@@ -99,10 +100,10 @@
 
                 <div class="row mt-4">
                     <div class="col-md-12 mb-4 text-center">
-                        {% if not checkin_time %}
+                        {% if not checkin_time  %}
                         <button class="btn btn-lg" type="submit"
                             style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;">CHECKIN</button>
-                        {% else %}
+                        {% elif checkin_time or error_message %}
                         <button class="btn btn-lg" type="submit"
                             style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;" disabled>CHECKIN</button>
                         {% endif %}
@@ -124,7 +125,7 @@
                 <input type="text" name="long" value="{{ long }}" hidden>
 
                 <div class="camera-button-container">
-                    <label for="checkout_image" class="camera-button">
+                    <label for="checkout_image" class="camera-button" required>
                         <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="#F04E23"
                             class="bi bi-plus-circle" viewBox="0 0 16 16" id="cameraIcon">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />

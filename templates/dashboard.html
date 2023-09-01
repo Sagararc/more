@@ -24,6 +24,10 @@
     /* Add other disabled link styles here */
 }
 
+.space-before {
+    margin-right: 110px;
+}
+
 </style>
 <body style="background-color:#F04E23;">
 
@@ -31,14 +35,10 @@
         <div class="col-md-12 ">
 
 
-            <div class="row justify-content-left mt-4 abc "
-                style="background-color: white; width: auto; height:auto; border-radius:40px;">
+            <div class="row justify-content-left mt-4" style=" width: auto; height:auto; border-radius:40px;">
                 <div class="col-md-7 text-left">
-                    <h3 class="dash-head">Dashboard</h3>
+                    <h3 class="dash-head" style="color:white;">Dashboard</h3>
                 </div>
-
-               
-                
             </div>
 
 
@@ -59,7 +59,6 @@
                                     class="bi bi-calendar2-check-fill" viewBox="0 0 16 16" style="vertical-align: middle;">
                                     <path
                                         d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zm9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5zm-2.6 5.854a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
-                                        
                                     </svg>
                                     <a href="/attendance" style="text-decoration: none; color: #F04E23;">
                                         <span style="font-size: 20px; font-weight: 500; margin: 0 10px;">|</span>
@@ -82,18 +81,20 @@
         <div class="card" style="border-radius: 20px;">
             <div class="card-body text-center">
                 <div class="checkin">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#F04E23" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#F04E23" class="bi bi-geo-alt" viewBox="0 0 16 16" style="vertical-align: middle;">
                         <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
                         <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                       </svg>
                     <span style="font-size: 20px; font-weight: 500; margin: 0 10px; color:#F04E23;">|</span>
                     {% if checkin_time %}
                     <a href="/form" class="active-link" style="text-decoration: none;">
-                        <span style="font-size: 20px; font-weight: 500; color: #F04E23;">Visit</span>
+
+                        <span style="font-size: 20px; font-weight: 500; color: #F04E23;  margin: 0 60px;">Visit</span>
                     </a>
                 {% else %}
                     <a href="#" class="disabled-link" style="text-decoration: none;">
-                        <span style="font-size: 20px; font-weight: 500; color: #F04E23;">Visit</span>
+                        
+                        <span style="font-size: 20px; font-weight: 500; color: #F04E23;  margin: 0 60px;">Visit</span>
                     </a>
                 {% endif %}
                 
