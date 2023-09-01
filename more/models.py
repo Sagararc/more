@@ -69,6 +69,7 @@ class SupFormModel(models.Model):
     user = models.CharField(max_length=100,blank=True , null=True)
     username = models.CharField(max_length=100,blank=True , null=True)
     outlet = models.ForeignKey(OutletModel , on_delete=models.CASCADE)
+    moname = models.CharField(max_length=100,blank=True , null=True)
     uniform = models.CharField(max_length=100 , blank=True , null=True)
     grooming = models.CharField(max_length=100 , blank=True , null=True)
     ol = models.CharField(max_length=10, choices=[('Yes', 'Yes'), ('No', 'No')])
@@ -84,6 +85,7 @@ class SupFormModel(models.Model):
     lat = models.CharField(max_length=100 ,blank=True , null=True)
     long = models.CharField(max_length=100 ,blank=True , null=True)
     ts = models.CharField(max_length=100 ,blank=True , null=True)
+    remark = models.CharField(max_length=100 ,blank=True , null=True)
 
     def __str__(self):
         return self.username

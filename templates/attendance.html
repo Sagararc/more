@@ -66,6 +66,11 @@
     </div>
 
 
+    {% if error_message %}
+    <div class="alert alert-danger">
+        {{error_message}}
+     </div>
+     {% endif %}
 
     <div class="row  justify-content-center" style="background-color:white;">
 
