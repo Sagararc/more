@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MoreConfig(AppConfig):
+class AdminareaConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'more'
+    name = 'adminArea'

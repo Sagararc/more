@@ -17,6 +17,7 @@ class AttendanceModel(models.Model):
     checkin_image = models.ImageField(upload_to='checkin/',null=True, default="",blank=True)
     lat = models.CharField(max_length=100 , blank=True , null=True,default=0.0)
     long = models.CharField(max_length=100 , blank=True , null=True ,default=0.0)
+    flag = models.CharField(max_length=100 , blank=True , null=True ,default= 0)
    
     
     
