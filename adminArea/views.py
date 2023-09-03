@@ -84,7 +84,7 @@ def register(request):
            password = form.cleaned_data['password1']
            user = authenticate(request ,first_name=first_name , username = username , password=password)
            login(request , user)
-           return redirect('dash')
+           return redirect('user')
         else:
             print(form.errors)
     form = RegisterUserForm()
