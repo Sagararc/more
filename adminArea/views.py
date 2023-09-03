@@ -79,11 +79,11 @@ def register(request):
         
         if form.is_valid() :
            form.save()
-           first_name = form.cleaned_data['first_name']
-           username = form.cleaned_data['username']
-           password = form.cleaned_data['password1']
-           user = authenticate(request ,first_name=first_name , username = username , password=password)
-           login(request , user)
+        #    first_name = form.cleaned_data['first_name']
+        #    username = form.cleaned_data['username']
+        #    password = form.cleaned_data['password1']
+        #    user = authenticate(request ,first_name=first_name , username = username , password=password)
+        
            return redirect('user')
         else:
             print(form.errors)
