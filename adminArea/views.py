@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.models import User
 
 
 
@@ -52,7 +53,7 @@ def logout_user1(request):
 @user_passes_test(is_superuser)
 @login_required
 def userManage(request):
-    usr = UserLogin.objects.all()
+    usr = User.objects.all()
     
     search = request.GET.get('search')
     cities = request.GET.get('citySearch')
