@@ -205,8 +205,8 @@ class Echo:
 @user_passes_test(is_superuser)
 @login_required
 def export_data(request):
-    data = UserLogin.objects.all()
-    model_fields = UserLogin._meta.fields
+    data = User.objects.all()
+    model_fields = User._meta.fields
     excluded_fields = ['password']
     field_names = [field.name for field in model_fields if field.name not in excluded_fields]
 
@@ -233,9 +233,9 @@ def raw_export_data(request):
     field_names = [field.name for field in model_fields if field.name not in excluded_fields]
 
     # Add your custom headers here
-    custom_headers = ["Id", "User","Code" ,"MO Name", "Uniform" , "Grooming" , "Sharing the Outlet location" , "Sharing the Present Offer information" ,
+    custom_headers = ["Id", "User","Code" , "Outlet","MO Name", "Uniform" , "Grooming" , "Sharing the Outlet location" , "Sharing the Present Offer information" ,
                    "Sharing the benefits of shopping from MORE","Showing the App", "Handed over the Leaflet" , "Pushed customer for App Download" , "Script delivery" , "How confident she was while interection" , "How Many Calls MO did till supervisor Visit",
-                  "Photo Shared with MO on Group" , "Latitude" , "Longitude" , "Time of Visit" ]
+                  "Photo Shared with MO on Group" , "Latitude" , "Longitude" , "Time of Visit" , "Remark" ]
 
     rows = ([getattr(row, field_name) for field_name in field_names] for row in data)
     rows = list(rows)  # Convert generator object to a list
