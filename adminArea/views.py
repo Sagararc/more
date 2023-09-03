@@ -18,7 +18,6 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 
 
-
 def is_superuser(user):
     return user.is_superuser
 
@@ -56,7 +55,7 @@ def userManage(request):
     usr = User.objects.all()
     
     search = request.GET.get('search')
-    cities = request.GET.get('citySearch')
+ 
 
     if search:
         usr = usr.filter(
@@ -233,7 +232,7 @@ def raw_export_data(request):
     field_names = [field.name for field in model_fields if field.name not in excluded_fields]
 
     # Add your custom headers here
-    custom_headers = ["Id", "User","Code" , "Outlet","MO Name", "Uniform" , "Grooming" , "Sharing the Outlet location" , "Sharing the Present Offer information" ,
+    custom_headers = ["Id", "User","Code" ,"Outlet","MO Name", "Uniform" , "Grooming" , "Sharing the Outlet location" , "Sharing the Present Offer information" ,
                    "Sharing the benefits of shopping from MORE","Showing the App", "Handed over the Leaflet" , "Pushed customer for App Download" , "Script delivery" , "How confident she was while interection" , "How Many Calls MO did till supervisor Visit",
                   "Photo Shared with MO on Group" , "Latitude" , "Longitude" , "Time of Visit" , "Remark" ]
 
