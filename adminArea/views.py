@@ -43,9 +43,9 @@ def adminLogin(request):
     else:
         return render(request, 'adminlogin.html')
 
-def logout_user1(request):
+def logout_user(request):
     logout(request)
-    return HttpResponseRedirect('/user')
+    return HttpResponseRedirect('/adminLogin')
         
 
 
