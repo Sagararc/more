@@ -32,10 +32,8 @@ def login_view(request):
         return HttpResponse("Wrong credentials. Please try again.")
     else:
         return render(request, 'login.html')
-
-def logout_user(request):
-    logout(request)
-    return HttpResponseRedirect('/')
+    
+    
         
 @login_required    
 def dash(request) :
@@ -43,6 +41,7 @@ def dash(request) :
     checkin_time = request.session.get('checkin_time', None)
     print(user)
     return render(request , 'dashboard.html',{'user' : user,'checkin_time':checkin_time}) 
+
 
 
 
@@ -208,3 +207,7 @@ def supForm(request):
 def success(request):
     return render(request , 'success.html')
 
+
+def logout_user(request):
+    
+    return HttpResponseRedirect('/')
