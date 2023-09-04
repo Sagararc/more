@@ -44,7 +44,7 @@ def adminLogin(request):
         return render(request, 'adminlogin.html')
 
 def logout_user(request):
-    logout(request)
+    
     return HttpResponseRedirect('/adminLogin')
         
 
@@ -59,8 +59,8 @@ def userManage(request):
 
     if search:
         usr = usr.filter(
-            Q(name__icontains=search) |
-            Q(code__icontains=search)
+            Q(first_name__icontains=search) |
+            Q(username__icontains=search)
         )
     
     paginator = Paginator(usr, 10)  
