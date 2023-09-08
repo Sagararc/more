@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import user_passes_test
+import re
 
 # Create your views here.
 
@@ -34,6 +35,7 @@ def login_view(request):
         return render(request, 'login.html')
 
 def logout_user(request):
+    logout(request)
     return HttpResponseRedirect('/')
         
 @login_required    
@@ -62,23 +64,31 @@ def attendance(request):
             return render(request, 'attendance.html', {'error_message' : error_message})
 
         if form.is_valid():
-            url = "https://ipinfo.io/json"
-            resp = urlopen(url)
-            data = json.load(resp)
-            lat = data['loc'].split(',')[0]
-            long = data['loc'].split(',')[1]
             checkin = datetime.utcnow() + timedelta(hours=5, minutes=30)
             image = request.FILES.get('checkin_image')
             user = request.user.first_name
             flag = 1
+            lat = request.POST.get('lat')
+            long = request.POST.get('long')
+            print("yes")
+            print("lat : " + lat +"long : "+ long)
 
             form.instance.user = user
             form.instance.username = username
-            form.instance.lat = lat
-            form.instance.long = long
             form.instance.checkin = checkin
             form.instance.checkin_image = image
             form.instance.flag = flag
+
+            # Get the user's location
+            # url = "https://ipinfo.io/json"
+            # resp = urlopen(url)
+            # data = json.load(resp)
+            # lat = data['loc'].split(',')[0]
+            # long = data['loc'].split(',')[1]
+
+            form.instance.lat = lat
+            form.instance.long = long
+            
             form.save()
             request.session['checkin_time'] = checkin.strftime('%Y-%m-%d %H:%M:%S')
 
@@ -92,10 +102,10 @@ def attendance(request):
     checkin_times = AttendanceModel.objects.filter(checkin__startswith=str(today_date), username=username).values_list('checkin', flat=True)
     checkin_time = checkin_times.first() if checkin_times else None
     
-    
     form = AttendanceForm(initial={'user': request.user.first_name})
-    context = {'user': request.user.first_name, 'checkin_time': checkin_time  }
+    context = {'user': request.user.first_name, 'checkin_time': checkin_time}
     return render(request, 'attendance.html', context)
+
 
 
 
@@ -158,7 +168,6 @@ def checkout(request):
 
 
 
-
 @login_required
 def supForm(request):
     user = request.user.first_name
@@ -215,7 +224,7 @@ def supForm(request):
             form.save()
             return redirect('/success')
         else:
-            print(form.errors)    
+            print(form.errors)   
     return render(request , 'supForm.html' , {'user' : user , 'out' : out})
 
 

@@ -66,29 +66,27 @@
     </div>
 
 
-    {% if error_message %}
-    <div class="alert alert-danger">
-        {{error_message}}
-     </div>
-     {% endif %}
 
     <div class="row  justify-content-center" style="background-color:white;">
 
         <div class="col-md-6 col-12 mb-4 text-center">
-            <form action="{% url 'attendance' %}" role="form" method="POST" enctype="multipart/form-data">
+            <form id="checkin-form" action="{% url 'attendance' %}" role="form" method="POST"
+                enctype="multipart/form-data" onsubmit="captureLocation(event)">
                 {% csrf_token %}
                 <input type="text" value={{user}} name='user' hidden>
                 <input type="text" value={{username}} name='username' hidden>
-              
+
                 <input type="text" name="checkin" value="{{ checkin }}" hidden>
-                <input type="text" name="lat" value="{{ lat }}" hidden>
-                <input type="text" name="long" value="{{ long }}" hidden>
+                <input type="text" name="lat" id="lat" value="{{ lat }}" hidden>
+                <input type="text" name="long" id="long" value="{{ long }}" hidden>
+
                 <input type="text" name="flag" value="{{ flag }}" hidden>
 
                 <div class="camera-button-container">
                     <label for="checkin_image" class="camera-button">
                         {% if checkin_image_base64 %}
-                        <img src="data:image/jpeg;base64,{{ checkin_image_base64 }}" alt="Check-in Image" width="90" height="90">
+                        <img src="data:image/jpeg;base64,{{ checkin_image_base64 }}" alt="Check-in Image" width="90"
+                            height="90">
                         {% else %}
                         <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="#F04E23"
                             class="bi bi-plus-circle" viewBox="0 0 16 16" id="cameraIcon">
@@ -97,20 +95,22 @@
                                 d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                         </svg>
                         {% endif %}
-                        <input type="file" id="checkin_image" name="checkin_image" accept="image/*" capture="camera" required>
+                        <input type="file" id="checkin_image" name="checkin_image" accept="image/*" capture="camera"
+                            required>
                     </label>
                 </div>
-                
-                
+
+
 
                 <div class="row mt-4">
                     <div class="col-md-12 mb-4 text-center">
-                        {% if not checkin_time  %}
-                        <button class="btn btn-lg" type="submit"
+                        {% if not checkin_time %}
+                        <button id="checkin-button" class="btn btn-lg" type="submit"
                             style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;">CHECKIN</button>
                         {% elif checkin_time or error_message %}
                         <button class="btn btn-lg" type="submit"
-                            style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;" disabled>CHECKIN</button>
+                            style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;"
+                            disabled>CHECKIN</button>
                         {% endif %}
 
                     </div>
@@ -119,12 +119,22 @@
             </form>
         </div>
 
+
+
+
+
+
+
+
+
+
+
         <div class="col-md-6 col-12 mb-4 text-center">
             <form action="{% url 'checkout' %}" role="form" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="text" value={{user}} name='user' hidden>
                 <input type="text" value={{username}} name='username' hidden>
-               
+
                 <input type="text" name="checkout" value="{{ checkout }}" hidden>
                 <input type="text" name="lat" value="{{ lat }}" hidden>
                 <input type="text" name="long" value="{{ long }}" hidden>
@@ -147,10 +157,11 @@
                             style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;">CHECKOUT</button>
                         {% else %}
                         <button class="btn btn-lg" type="submit"
-                            style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;" disabled>CHECKOUT</button>
+                            style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;"
+                            disabled>CHECKOUT</button>
                         {% endif %}
                     </div>
-                    
+
                 </div>
 
             </form>
@@ -163,46 +174,46 @@
 
 
 
-    
-
-        <div class="row">
-
-            <div class="col-md-4 text-center" style="color:#F04E23; font-weight:bolder;">
-               
-                {% if checkin_time %}
-                     <p  style="color: white;">{{ checkin_time }}</p>
-                     {% endif %}
-                <div class="chk" style="background-color: #F04E23; color:white;">
-                    <h4> Checkin Time</h4>
-                </div>
-            </div>
 
 
-            {% comment %} <div class="col-md-4 text-center" style="color:#F04E23; font-weight:bolder;">
-                {% if checkout_time %}
-                <p style="color: white;">{{ checkout_time }}</p>
-                {% endif %}
+    <div class="row">
 
-                <div class="chk" style="background-color: #F04E23; color:white;">
-                    <h4> CheckOut Time</h4>
-                </div>
-            </div>
+        <div class="col-md-4 text-center" style="color:#F04E23; font-weight:bolder;">
 
-
-            <div class="col-md-4 text-center" style="color:white; font-weight:bolder;">
-                <p>8 HRS</p>
-                <div class="chk" style="background-color: #F04E23; color:white;">
-                    <p>Total Working</p>
-                </div>
+            {% if checkin_time %}
+            <p style="color: white;">{{ checkin_time }}</p>
+            {% endif %}
+            <div class="chk" style="background-color: #F04E23; color:white;">
+                <h4> Checkin Time</h4>
             </div>
         </div>
- {% endcomment %}
 
 
-   
+        {% comment %} <div class="col-md-4 text-center" style="color:#F04E23; font-weight:bolder;">
+            {% if checkout_time %}
+            <p style="color: white;">{{ checkout_time }}</p>
+            {% endif %}
+
+            <div class="chk" style="background-color: #F04E23; color:white;">
+                <h4> CheckOut Time</h4>
+            </div>
+        </div>
 
 
-    
+        <div class="col-md-4 text-center" style="color:white; font-weight:bolder;">
+            <p>8 HRS</p>
+            <div class="chk" style="background-color: #F04E23; color:white;">
+                <p>Total Working</p>
+            </div>
+        </div>
+    </div>
+    {% endcomment %}
+
+
+
+
+
+
 
 
 
@@ -220,8 +231,36 @@
         });
     </script>
 
+    <script>
+     function captureLocation(event) {
+            // Check if geolocation is supported by the browser
+            if (navigator.geolocation) {
+                event.preventDefault(); // Prevent the form from submitting immediately
+
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    // Get the latitude and longitude
+                    const lat = position.coords.latitude
+                    const long = position.coords.longitude
+                    console.log(lat,  long)
+                    // Set the values of the hidden fields
+                    document.getElementById('lat').value = lat;
+                    document.getElementById('long').value = long;
+
+                    // Submit the form
+                    document.getElementById('checkin-form').submit();
+                }, function (error) {
+                    // Handle errors here
+                    console.error('Error getting location:', error);
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        } 
 
 
+    </script>
+
+ 
 
 </body>
 
