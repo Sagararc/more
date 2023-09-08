@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render ,HttpResponse , redirect , HttpResponseRedirect , get_object_or_404
+from django.shortcuts import render ,HttpResponse , redirect , HttpResponseRedirect 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -44,7 +44,6 @@ def adminLogin(request):
         return render(request, 'adminlogin.html')
 
 def logout_user(request):
-    
     return HttpResponseRedirect('/adminLogin')
         
 

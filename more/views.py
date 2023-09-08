@@ -34,31 +34,33 @@ def login_view(request):
         return render(request, 'login.html')
 
 def logout_user(request):
-    
     return HttpResponseRedirect('/')
         
 @login_required    
 def dash(request) :
+    now = datetime.utcnow() + timedelta(hours=5, minutes=30)
+    today_date = now.date()
     user = request.user.first_name
-    checkin_time = request.session.get('checkin_time', None)
+    username = request.user.username
+    checkin_times = AttendanceModel.objects.filter(checkin__startswith=str(today_date), username=username).values_list('checkin', flat=True)
+    checkin_time = checkin_times.first() if checkin_times else None
     print(user)
     return render(request , 'dashboard.html',{'user' : user,'checkin_time':checkin_time}) 
 
-
-
-@login_required
+@login_required 
 def attendance(request):
-    
     now = datetime.utcnow() + timedelta(hours=5, minutes=30)
     today_date = now.date()
-    print(today_date)
     username = request.user.username
+    
     if request.method == 'POST':
         form = AttendanceForm(request.POST, request.FILES)
-        attendance_records_today = AttendanceModel.objects.filter(checkin__startswith=str(today_date))
+        attendance_records_today = AttendanceModel.objects.filter(checkin__startswith=str(today_date), username=username)
+
         if attendance_records_today:
             error_message = "Already Checked In For Today"
             return render(request, 'attendance.html', {'error_message' : error_message})
+
         if form.is_valid():
             url = "https://ipinfo.io/json"
             resp = urlopen(url)
@@ -68,8 +70,8 @@ def attendance(request):
             checkin = datetime.utcnow() + timedelta(hours=5, minutes=30)
             image = request.FILES.get('checkin_image')
             user = request.user.first_name
-            username = request.user.username
             flag = 1
+
             form.instance.user = user
             form.instance.username = username
             form.instance.lat = lat
@@ -78,17 +80,21 @@ def attendance(request):
             form.instance.checkin_image = image
             form.instance.flag = flag
             form.save()
-            # Store check-in time in the session
             request.session['checkin_time'] = checkin.strftime('%Y-%m-%d %H:%M:%S')
+
+            # Remove check-in time from the session
+            request.session.pop('checkin_time', None)
             
             return redirect('dash')
         else:
             print(form.errors)
 
-    # Get check-in time from the session
-    checkin_time = request.session.get('checkin_time', None)
+    checkin_times = AttendanceModel.objects.filter(checkin__startswith=str(today_date), username=username).values_list('checkin', flat=True)
+    checkin_time = checkin_times.first() if checkin_times else None
+    
+    
     form = AttendanceForm(initial={'user': request.user.first_name})
-    context = {'user': request.user.first_name, 'checkin_time': checkin_time }
+    context = {'user': request.user.first_name, 'checkin_time': checkin_time  }
     return render(request, 'attendance.html', context)
 
 
@@ -96,7 +102,17 @@ def attendance(request):
 
 @login_required    
 def checkout(request):
+    now = datetime.utcnow() + timedelta(hours=5, minutes=30)
+    today_date = now.date()
     user = request.user.first_name
+    
+    # Check if the user has already checked out for today
+    checkout_records_today = CheckoutModel.objects.filter(checkout__startswith=str(today_date), username=user)
+
+    if checkout_records_today:
+        error_message = "Already Checked Out For Today"
+        return render(request, 'attendance.html', {'error_message': error_message})
+
     if request.method == 'POST':
         form = CheckoutForm(request.POST, request.FILES)
         if form.is_valid():
@@ -120,25 +136,24 @@ def checkout(request):
 
             # Store check-out time in the session
             request.session['checkout_time'] = checkout.strftime('%Y-%m-%d %H:%M:%S')
-            print(request.session['checkout_time'] , checkout)
-            request.session.flush()
             
-            return redirect("/logout")
+            return redirect('logout')  # Assuming you have a 'logout' URL pattern defined
         else:
             print(form.errors)
 
-    # Retrieve check-out time from the session
-    checkout_time = request.session.get('checkout_time', None)
+    checkout_times = CheckoutModel.objects.filter(checkout__startswith=str(today_date), username=user).values_list('checkout', flat=True)
+    checkout_time = checkout_times.first() if checkout_times else None
     
-    form = CheckoutForm(initial={'user': request.user.first_name})
+    form = CheckoutForm(initial={'user': user})
     att = CheckoutModel.objects.all().order_by('-id')
     
     paginator = Paginator(att, 10)  
     page_number = request.GET.get('page')
     att = paginator.get_page(page_number)
     
-    context = {'user': request.user.first_name, 'checkout_time': checkout_time, 'att' : att}
+    context = {'user': user, 'checkout_time': checkout_time, 'att' : att}
     return render(request, 'attendance.html', context)
+
 
 
 
