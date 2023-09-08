@@ -78,7 +78,7 @@ class SupFormModel(models.Model):
     sapp = models.CharField(max_length=10, choices=[('Yes', 'Yes'), ('No', 'No')])
     leaf = models.CharField(max_length=10, choices=[('Yes', 'Yes'), ('No', 'No')])
     dapp = models.CharField(max_length=10, choices=[('Yes', 'Yes'), ('No', 'No')])
-    script = models.CharField(max_length=10, choices=[('Yes', 'Yes'), ('No', 'No')])
+    script = models.CharField(max_length=100,blank=True , null=True)
     confi = models.CharField(max_length=10, choices=confi_choice)
     calls = models.CharField(max_length=400 , blank=True , null=True)
     ps =  models.CharField(max_length=10, choices=[('Yes', 'Yes'), ('No', 'No')])
