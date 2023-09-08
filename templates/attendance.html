@@ -232,16 +232,16 @@
     </script>
 
     <script>
-     function captureLocation(event) {
+        function captureLocation(event) {
             // Check if geolocation is supported by the browser
             if (navigator.geolocation) {
                 event.preventDefault(); // Prevent the form from submitting immediately
 
                 navigator.geolocation.getCurrentPosition(function (position) {
                     // Get the latitude and longitude
-                    const lat = position.coords.latitude
-                    const long = position.coords.longitude
-                    console.log(lat,  long)
+                    const lat = position.coords.latitude.toFixed(6); // Round to six decimal places
+                    const long = position.coords.longitude.toFixed(6);
+
                     // Set the values of the hidden fields
                     document.getElementById('lat').value = lat;
                     document.getElementById('long').value = long;
@@ -257,10 +257,9 @@
             }
         } 
 
-
+        
     </script>
 
- 
 
 </body>
 
