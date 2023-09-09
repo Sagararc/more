@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="utf-8">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MORE</title>
     <link rel="stylesheet" href="/static/css/main.css">
@@ -72,7 +71,7 @@
 
         <div class="col-md-6 col-12 mb-4 text-center">
             <form id="checkin-form" action="{% url 'attendance' %}" role="form" method="POST"
-                enctype="multipart/form-data" onsubmit="captureLocation(event)">
+                enctype="multipart/form-data" >
                 {% csrf_token %}
                 <input type="text" value={{user}} name='user' hidden>
                 <input type="text" value={{username}} name='username' hidden>
@@ -211,18 +210,6 @@
     {% endcomment %}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     <script>
         const cameraIcon = document.getElementById("cameraIcon");
         const cameraInput = document.getElementById("cameraInput");
@@ -232,7 +219,7 @@
         });
     </script>
 
-    <script>
+    <!-- <script>
         function captureLocation(event) {
             // Check if geolocation is supported by the browser
             if (navigator.geolocation) {
@@ -259,7 +246,7 @@
         } 
 
         
-    </script>
+    </script> -->
 
 
 </body>
