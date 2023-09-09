@@ -152,17 +152,17 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12 mb-4 text-center">
-                        {% if checkin_time %}
-                        <button class="btn btn-lg" type="submit"
-                            style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;">CHECKOUT</button>
+                        {% if not checkin_time  %}
+                            <button class="btn btn-lg" type="submit" style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;" disabled>CHECKOUT</button>
+
+                        {% elif  checkout_time  %}
+                            <button class="btn btn-lg" type="submit" style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;" disabled>CHECKOUT</button>
                         {% else %}
-                        <button class="btn btn-lg" type="submit"
-                            style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;"
-                            disabled>CHECKOUT</button>
+                            <button class="btn btn-lg" type="submit" style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;">CHECKOUT</button>
                         {% endif %}
                     </div>
-
                 </div>
+                
 
             </form>
         </div>
