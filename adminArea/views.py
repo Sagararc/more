@@ -255,7 +255,7 @@ def raw_export_data(request):
 @login_required
 def attendence1(request):
     att = AttendanceModel.objects.all().order_by('-id')
-    chk = CheckoutModel.objects.all()
+    chk = CheckoutModel.objects.all().order_by('-id')
     paginator = Paginator(att, 10)  
     page_number = request.GET.get('page')
     att = paginator.get_page(page_number)
