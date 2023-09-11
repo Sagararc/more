@@ -122,7 +122,7 @@
                     <thead>
                         <tr>
                             
-
+                            <th>S.NO.</th>
                             <th>Check-Out Time</th>
                             <th>Lat/Long</th>
                             <th>Check-Out Selfie</th>
@@ -135,7 +135,7 @@
                     <tbody>
                         {% for u in chk %}
                         <tr>
-              
+                            <td>{{ forloop.counter }}</td>
                             <td>{{ u.checkout}}</td>
                             <td>{{ u.lat}} /{{ u.long }}</td>
                             <td>
