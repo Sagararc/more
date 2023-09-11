@@ -68,10 +68,10 @@ def attendance(request):
             image = request.FILES.get('checkin_image')
             user = request.user.first_name
             flag = 1
-            # lat = request.POST.get('lat')
-            # long = request.POST.get('long')
-            # print("yes")
-            # print("lat : " + lat +"long : "+ long)
+            lat = request.POST.get('lat')
+            long = request.POST.get('long')
+            print("yes")
+            print("lat : " + lat +"long : "+ long)
 
             form.instance.user = user
             form.instance.username = username
@@ -80,11 +80,11 @@ def attendance(request):
             form.instance.flag = flag
 
             # Get the user's location
-            url = "https://ipinfo.io/json"
-            resp = urlopen(url)
-            data = json.load(resp)
-            lat = data['loc'].split(',')[0]
-            long = data['loc'].split(',')[1]
+            # url = "https://ipinfo.io/json"
+            # resp = urlopen(url)
+            # data = json.load(resp)
+            # lat = data['loc'].split(',')[0]
+            # long = data['loc'].split(',')[1]
 
             form.instance.lat = lat
             form.instance.long = long
