@@ -71,7 +71,7 @@
 
         <div class="col-md-6 col-12 mb-4 text-center">
             <form id="checkin-form" action="{% url 'attendance' %}" role="form" method="POST"
-                enctype="multipart/form-data" onsubmit="captureLocation(event)">
+                enctype="multipart/form-data" >
                 {% csrf_token %}
                 <input type="text" value={{user}} name='user' hidden>
                 <input type="text" value={{username}} name='username' hidden>
