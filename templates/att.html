@@ -135,15 +135,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for u in chk %}
+                        {% for c in chk %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ u.user }}</td>
-                            <td>{{ u.username }}</td>
-                            <td>{{ u.checkout}}</td>
-                            <td>{{ u.lat}} /{{ u.long }}</td>
+                            <td>{{ c.user }}</td>
+                            <td>{{ c.username }}</td>
+                            <td>{{ c.checkout}}</td>
+                            <td>{{ c.lat}} /{{ c.long }}</td>
                             <td>
-                                {% if u.checkout_image %}
+                                {% if c.checkout_image %}
                                 <img src="{{ u.checkout_image.url }}" width="100" height="100">
                                 {% else %}
                                 <span></span>
