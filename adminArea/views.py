@@ -299,7 +299,7 @@ def add_city(request):
             city = request.POST.get('city')
             
             form.save()
-            return redirect('home')
+            return redirect('city')
     else:
         form = CityForm()
     cities = CityModel.objects.all()
