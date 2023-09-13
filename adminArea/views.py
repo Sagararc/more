@@ -98,11 +98,11 @@ def dash1(request):
     count = users.count()
     print(count)
     context = {
-        'count' : count,
+        'count' : count
         
         
     }
-    return render(request , 'dash1.html' )
+    return render(request , 'dash1.html' , context )
 
 
 
