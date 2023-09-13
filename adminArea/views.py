@@ -95,13 +95,15 @@ def register(request):
 @login_required
 def dash1(request):
     users = User.objects.all()
-    sup = SupFormModel.objectsa.all()
+    sup = SupFormModel.objects.all()
     out = OutletModel.objects.all()
     city = CityModel.objects.all()
+    
+    
     count = users.count()
     data_counter = sup.count()
     city_counter = city.count()
-    out_counter= out.count()
+    out_counter = out.count()
     
     context = {
         'count' : count,
