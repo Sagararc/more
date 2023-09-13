@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from more.models import AttendanceModel , UserLogin ,CheckoutModel,OutletModel,SupFormModel , CityModel
 from urllib.request import urlopen
-from more.forms import OutletForm,RegisterUserForm
+from more.forms import OutletForm,RegisterUserForm,CityForm
 from datetime import datetime,timedelta
 import csv
 from django.http import StreamingHttpResponse
