@@ -19,5 +19,6 @@ urlpatterns = [
     path('check-out/' , views.checkout, name = 'check-out'),
     path('city/' , views.city , name = 'city'),
     path('add_city/' , views.add_city , name = 'add_city'),
+    path('dash1/' , views.dash1 , name = 'dash1'),
    
 ]

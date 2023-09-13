@@ -91,7 +91,13 @@ def register(request):
 
 
 
-
+@user_passes_test(is_superuser)
+@login_required
+def dash1(request):
+    users = User.objects.all()
+    count = users.count()
+    
+    return render(request , 'dash1.html')
 
 
 
