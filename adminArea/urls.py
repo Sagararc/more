@@ -17,5 +17,7 @@ urlpatterns = [
     path('updateOutlet/<int:id>/' , views.updateOutlet, name = 'updateOutlet'),
     path('raw/' ,views.raw , name= 'raw'),
     path('check-out/' , views.checkout, name = 'check-out'),
+    path('city/' , city , name = 'city'),
+    path('add_city/' , add_city , name = 'add_city'),
    
 ]

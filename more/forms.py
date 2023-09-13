@@ -1,7 +1,8 @@
 from django import forms
-from .models import UserLogin,AttendanceModel,CheckoutModel ,OutletModel , SupFormModel
+from .models import UserLogin,AttendanceModel,CheckoutModel ,OutletModel , SupFormModel, CityModel
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class RegisterUserForm(UserCreationForm):
     first_name = forms.CharField(max_length=100)
@@ -52,4 +53,18 @@ class SupForm(forms.ModelForm):
         model = SupFormModel
         fields = '__all__'
         
+class CityForm(forms.ModelForm):
     
+
+    class Meta:
+        model = CityModel  
+        fields = ['city']
+
+    def clean_dob(self):
+        city = self.cleaned_data.get('city')
+        city1 = CityModel.objects.all()
+        
+        for i in city1:
+            if i==city:
+                raise ValidationError('City Already Registered')
+        return city

@@ -4,7 +4,7 @@ from django.shortcuts import render ,HttpResponse , redirect , HttpResponseRedir
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from more.models import AttendanceModel , UserLogin ,CheckoutModel,OutletModel,SupFormModel
+from more.models import AttendanceModel , UserLogin ,CheckoutModel,OutletModel,SupFormModel , CityModel
 from urllib.request import urlopen
 from more.forms import OutletForm,RegisterUserForm
 from datetime import datetime,timedelta
@@ -278,8 +278,34 @@ def checkout(request):
     return render(request , 'checkout.html' , { 'chk' : chk})
 
 
-    
 
+@user_passes_test(is_superuser)
+@login_required    
+def city(request):
+    city = CityModel.objects.all()
+    data = CityModel.objects.all().order_by('-id')
+    paginator = Paginator(data, 10)  
+    page_number = request.GET.get('page')
+    data = paginator.get_page(page_number)
+
+    return render(request, 'city.html', {'city' : city , 'data':data })
+
+@user_passes_test(is_superuser)
+@login_required
+def add_city(request):
+    if request.method == 'POST':
+        form = CityForm(request.POST)
+        if form.is_valid():
+            city = request.POST.get('city')
+            
+            form.save()
+            return redirect('home')
+    else:
+        form = CityForm()
+    cities = CityModel.objects.all()
+    
+  
+    return render(request, 'cityReg.html', {'form': form , 'cities' : cities } )
 
         
 
