@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>MORE|ADMIN</title>
+  <title>Dastyle - Admin & Dashboard Template</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
   <meta content="" name="author" />
@@ -26,6 +26,38 @@
   <link rel="stylesheet" href="/static/css/form.css">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
+  <style>
+    .nav-link {
+        color: #000; /* Set the color of the text */
+    }
+
+    .nav-link:hover {
+        color: #fff; /* Change text color on hover */
+        background-color: #007bff; /* Change background color on hover */
+    }
+
+    .dropdown-menu {
+        background-color: #fff; /* Background color of dropdown */
+        border: none; /* Remove border */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Add a slight shadow */
+    }
+
+    .dropdown-item {
+        color: #000; /* Set the color of the dropdown items */
+    }
+
+    .dropdown-item:hover {
+        background-color: #f8f9fa; /* Change background color on hover */
+    }
+
+    .dropdown-menu a {
+        padding: 10px 20px; /* Add some padding around the items */
+    }
+
+    .dropdown-menu a i {
+        margin-right: 10px; /* Add some space between icon and text */
+    }
+</style>
 
 
 </head>
@@ -67,8 +99,15 @@
         
         
         <li>
-          <a href="/attendence1"> <i class="fas fa-id-card"
-              class="align-self-center menu-icon"></i><span>Attendence</span></a>
+         
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-id-card"></i>
+            <span>Attendance</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 200px; text-align:center; font-size : 20px; font-weight: bolder ;">
+            <a class="dropdown-item " href="/attendence1" >Check-In</a>
+            <a class="dropdown-item" href="/check-out">Check-Out</a>
+        </div>
 
         </li>
 
@@ -80,7 +119,7 @@
 
         <li>
           <a href="/raw"> <i class="fas fa-id-card"
-              class="align-self-center menu-icon"></i><span>Raw</span></a>
+              class="align-self-center menu-icon"></i><span>Raw Data</span></a>
 
         </li>
       </ul>

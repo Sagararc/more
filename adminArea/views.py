@@ -266,7 +266,16 @@ def attendence1(request):
     return render(request , 'att.html' , {'att' : att , 'chk' : chk})
 
 
-
+@user_passes_test(is_superuser)
+@login_required
+def checkout(request):
+    
+    chk = CheckoutModel.objects.all()
+    paginator = Paginator(chk, 10)  
+    page_number = request.GET.get('page')
+    chk = paginator.get_page(page_number)
+    
+    return render(request , 'checkout.html' , { 'chk' : chk})
 
 
     

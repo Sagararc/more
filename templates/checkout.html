@@ -5,12 +5,12 @@
 <div class="row container-fluid">
     <div class="col">
 
-
+       
     </div>
 
     <div class="col-sm-12 mt-2">
         <h2>
-            CHECK-IN
+            CHECK-OUT
 
         </h2>
 
@@ -19,21 +19,22 @@
 
 <div class="row container-fluid">
 
-    <div class="col-md-12 mt-4">
 
 
+
+    <div class="col-md-12 mt-4 ">
+        
         <div class="table-rep-plugin">
             <div class="table-responsive mb-0" data-pattern="priority-columns">
                 <table id="tech-companies-1" class="table table-striped mb-0">
                     <thead>
                         <tr>
+                            
                             <th>S.NO.</th>
                             <th>User</th>
                             <th>Code</th>
-
-                            <th>Check-In Time</th>
-                           
-                            <th>Check-In Selfie</th>
+                            <th>Check-Out Time</th>
+                            <th>Check-Out Selfie</th>
 
 
 
@@ -41,18 +42,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for u in att %}
+                        {% for u in chk %}
                         <tr>
+
                             <td>{{ forloop.counter }}</td>
+                            <td>{{ u.user}}</td>
+                            <td>{{ u.username}}</td>
 
-                            <td>{{ u.user }}</td>
-                            <td>{{ u.username }}</td>
-
-                            <td>{{ u.checkin }}</td>
-                          
+                            
+                            
+              
+                            <td>{{ u.checkout}}</td>
+                           
                             <td>
-                                {% if u.checkin_image %}
-                                <img src="{{ u.checkin_image.url }}" width="100" height="100">
+                                {% if u.checkout_image %}
+                                <img src="{{ u.checkout_image.url }}" width="100" height="100">
                                 {% else %}
                                 <span></span>
                                 {% endif %}
@@ -62,7 +66,8 @@
                         {% endfor %}
 
 
-                      
+                        
+
 
                     </tbody>
                 </table>
@@ -74,14 +79,14 @@
                                 <ul class="pagination">
                                     {% if att.has_previous %}
                                     <li class="page-item"><a class="page-link"
-                                            href="?page={{ att.previous_page_number }}">Previous</a>
+                                            href="?page={{ chk.previous_page_number }}">Previous</a>
                                     </li>
                                     {% else %}
                                     <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
                                     {% endif %}
                 
-                                    {% for page_num in att.paginator.page_range %}
-                                    <li class="page-item {% if page_num == att.number %}active{% endif %}">
+                                    {% for page_num in chk.paginator.page_range %}
+                                    <li class="page-item {% if page_num == chk.number %}active{% endif %}">
                                         <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
                                     </li>
                                     {% endfor %}
@@ -89,7 +94,7 @@
                 
                                     {% if att.has_next %}
                                     <li class="page-item"><a class="page-link"
-                                            href="?page={{ att.next_page_number }}">Next</a>
+                                            href="?page={{ chk.next_page_number }}">Next</a>
                                     </li>
                                     {% else %}
                                     <li class="page-item disabled"><a class="page-link" href="#">Next</a>
@@ -102,15 +107,8 @@
                 </div>
             </div>
         </div>
-
-       
-
+        
     </div>
-
-
-
-
-    
 
 
 </div>

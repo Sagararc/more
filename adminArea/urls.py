@@ -16,5 +16,6 @@ urlpatterns = [
     path('outlet/' , views.outlet, name = 'outlet'),
     path('updateOutlet/<int:id>/' , views.updateOutlet, name = 'updateOutlet'),
     path('raw/' ,views.raw , name= 'raw'),
+    path('check-out/' , views.checkout, name = 'check-out'),
    
 ]
