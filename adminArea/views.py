@@ -16,7 +16,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
-
+from collections import Counter
 
 def is_superuser(user):
     return user.is_superuser
@@ -95,10 +95,20 @@ def register(request):
 @login_required
 def dash1(request):
     users = User.objects.all()
+    sup = SupFormModel.objectsa.all()
+    out = OutletModel.objects.all()
+    city = CityModel.objects.all()
     count = users.count()
-    print(count)
+    data_counter = sup.count()
+    city_counter = city.count()
+    out_counter= out.count()
+    
     context = {
-        'count' : count
+        'count' : count,
+        'data_counter' : data_counter,
+        'city_counter' : city_counter,
+        'out_counter' : out_counter
+        
         
         
     }
@@ -134,6 +144,8 @@ def outlet(request):
     page_number = request.GET.get('page')
     out = paginator.get_page(page_number)
     return render(request , 'outlet.html' , {'out' : out ,  'usr' : usr })
+
+
 @user_passes_test(is_superuser)
 @login_required
 def updateOutlet(request , id):
@@ -147,6 +159,8 @@ def updateOutlet(request , id):
     else:
         form = OutletForm(instance=uid)
     return render(request, 'updateOutlet.html', {'form': form })
+
+
 @user_passes_test(is_superuser)
 @login_required
 def outReg(request):
@@ -161,10 +175,15 @@ def outReg(request):
         form = OutletForm()
     return render(request , 'outReg.html' , {'form': form })
 
+
+
 @user_passes_test(is_superuser)
 @login_required
 def import_page(request):
     return render(request , 'import.html')
+
+
+
 @user_passes_test(is_superuser)
 @login_required
 def import_data(request):
