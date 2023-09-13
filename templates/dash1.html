@@ -53,59 +53,26 @@
 </div>
 
 
-<div class="row container-fluid ml-1 mr-1">
-
-
-    <div class="card col-md-12 ">
-        <div class="row ">
-
-
-
-
-            <div class="col-md-3">
-
-
-
-                <h4>Designation </h4>
-                <span> Total : {{ tDes }}
-                </span>
-                <div>
-                    <canvas id="myChart" style=" height : 400px; "></canvas>
-                </div>
-
-
-            </div>
-
-            <div class="col-md-3">
-
-                <h4>Status</h4>
-                <span> Total : {{ tStatus }} </span>
-                <div>
-                    <canvas id="myChart1" style="height: 405px; display: block; box-sizing: border-box; width: 443px;">
-                    </canvas>
-                </div>
-
-
-
-
-            </div>
-
-            <div class="col-md-3">
-
-                <h4>Program Enroll</h4>
-                <span> Total : {{ tpro }} </span>
-                <div>
-                    <canvas id="myChart2" style="height: 405px; display: block; box-sizing: border-box; width: 443px;">
-                    </canvas>
-                </div>
-
-
-
-            </div>
-
+<div class="row container-fluid">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total Users</h5>
+          <p class="card-text">{{ count }}</p>
+         
         </div>
+      </div>
     </div>
 
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
 </div>
 
 {% endblock %}

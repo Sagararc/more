@@ -96,8 +96,13 @@ def register(request):
 def dash1(request):
     users = User.objects.all()
     count = users.count()
-    
-    return render(request , 'dash1.html')
+    print(count)
+    context = {
+        'count' : count,
+        
+        
+    }
+    return render(request , 'dash1.html' )
 
 
 
