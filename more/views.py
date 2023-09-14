@@ -58,7 +58,7 @@ def attendance(request):
     if request.method == 'POST':
         form = AttendanceForm(request.POST, request.FILES)
         attendance_records_today = AttendanceModel.objects.filter(checkin__startswith=str(today_date), username=username)
-      
+
         if attendance_records_today:
             error_message = "Already Checked In For Today"
             return render(request, 'attendance.html', {'error_message' : error_message})
@@ -101,10 +101,11 @@ def attendance(request):
 
     checkin_times = AttendanceModel.objects.filter(checkin__startswith=str(today_date), username=username).values_list('checkin', flat=True)
     checkin_time = checkin_times.first() if checkin_times else None
-    print("checkin" , checkin_time)
+    
     form = AttendanceForm(initial={'user': request.user.first_name})
     context = {'user': request.user.first_name, 'checkin_time': checkin_time}
     return render(request, 'attendance.html', context)
+
 
 
 
@@ -114,11 +115,10 @@ def checkout(request):
     now = datetime.utcnow() + timedelta(hours=5, minutes=30)
     today_date = now.date()
     user = request.user.first_name
-    username = request.user.username
-
+    
     # Check if the user has already checked out for today
-    checkout_records_today = CheckoutModel.objects.filter(checkout__startswith=str(today_date), username=username)
-    print(checkout_records_today)
+    checkout_records_today = CheckoutModel.objects.filter(checkout__startswith=str(today_date), username=user)
+
     if checkout_records_today:
         error_message = "Already Checked Out For Today"
         return render(request, 'attendance.html', {'error_message': error_message})
@@ -147,19 +147,13 @@ def checkout(request):
             # Store check-out time in the session
             request.session['checkout_time'] = checkout.strftime('%Y-%m-%d %H:%M:%S')
             
-            # You have this line, but it immediately removes the value from the session, so it won't be available for printing.
-            # Consider removing this line or using it where needed.
-            request.session.pop('checkout_time', None)
-            
             return redirect('logout')  # Assuming you have a 'logout' URL pattern defined
         else:
             print(form.errors)
 
-    checkout_times = CheckoutModel.objects.filter(checkout__startswith=str(today_date), username=username).values_list('checkout', flat=True)
+    checkout_times = CheckoutModel.objects.filter(checkout__startswith=str(today_date), username=user).values_list('checkout', flat=True)
     checkout_time = checkout_times.first() if checkout_times else None
-    print(checkout)
-    print(checkout_time)  # This should print checkout_time even if it's None or there's an error
-
+    
     form = CheckoutForm(initial={'user': user})
     att = CheckoutModel.objects.all().order_by('-id')
     
@@ -169,7 +163,6 @@ def checkout(request):
     
     context = {'user': user, 'checkout_time': checkout_time, 'att' : att}
     return render(request, 'attendance.html', context)
-
 
 
 
