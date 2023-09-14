@@ -104,10 +104,15 @@
 
                 <div class="row mt-4">
                     <div class="col-md-12 mb-4 text-center">
-                       
+                        {% if not checkin_time %}
                         <button id="checkin-button" class="btn btn-lg" type="submit"
                             style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;">CHECKIN</button>
-                    
+                        {% elif checkin_time or error_message %}
+                        <button class="btn btn-lg" type="submit"
+                            style="color: #F04E23; border: 3px solid #F04E23; border-radius: 10px;"
+                            disabled>CHECKIN</button>
+                        {% endif %}
+
                     </div>
                 </div>
 
@@ -214,7 +219,7 @@
         });
     </script>
 
-  
+
 
 </body>
 
