@@ -130,18 +130,17 @@ def outlet(request):
     
     out = OutletModel.objects.all().order_by('-id')
     search = request.GET.get('search')
-    cities = request.GET.get('citySearch')
+    
     usr = UserLogin.objects.all()
     
 
     if search:
-        out = out.filter(
-            Q(name__icontains = search)
-        )
-    elif cities:
-        out = out.filter(
-            Q(cityReg__id__icontains=cities)
-        )
+        data = data.filter(
+            Q(username__icontains=search) |
+            Q(outlet__name__icontains=search)|
+            Q(user__icontains=search)
+        )           
+        
     paginator = Paginator(out, 10)  
     page_number = request.GET.get('page')
     out = paginator.get_page(page_number)
